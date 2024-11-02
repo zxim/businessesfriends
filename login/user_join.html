@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>회원 가입</title>
+    <link rel="stylesheet" href="join.css">
+  </head>
+  <body> 
+
+    <h2>회원 가입</h2>
+    <div class="container">
+      
+      <form method="POST" action="user_join.php" enctype="multipart/form-data">
+        <p style="color: #ffff; font-size: 12px;">Username</p>
+        <input type="text" name="user_name" class="text-field" placeholder="이름">
+
+        <p style="color: #ffff; font-size: 12px;">Phone</p>
+        <input type="text" name="user_phone" class="text-field" placeholder="전화번호">
+
+        <p style="color: #ffff; font-size: 12px;">ID</p>
+        <input type="text" name="user_id" class="text-field" placeholder="아이디">
+
+        <p style="color: #ffff; font-size: 12px;">Password</p>
+        <input type="password" id="password1" name="password1" class="text-field" placeholder="비밀번호">
+
+        <p style="color: #ffff; font-size: 12px;">Comfirm Password</p>
+        <input type="password" id="password2" name="password2" class="text-field" placeholder="비밀번호 확인">
+
+        <p style="color: #ffff; font-size: 12px;">Set Your Profile</p>
+        <input type="file" name="user_profile" class="user_profile">
+
+        <input type="submit" id="submit" value="가입하기" class="submit-btn">
+
+        <!-- <button type="button" onclick="location.replace('index.html');" class="submit-btn2">취소</button> -->
+        <div class="link">
+          <a href="index.html">취소</a>
+        </div>
+        
+        <!-- <input type="button" value="취소" onclick="location.replace('index.html');" class="submit-btn2"> -->
+      </form>
+
+      
+    </div>           
+  </body>
+</html>

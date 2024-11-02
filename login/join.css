@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+    margin-top: 50px;
+    /* justify-content: center; */
+    background-color: rgb(173, 173, 173);
+}
+
+.title{
+    margin: 0 auto;
+}
+
+/* .container h1{ 
+    text-align: center;
+}*/
+
+h2{
+
+    margin-left: 20px;
+    color: #ffffff;
+}
+
+.container{
+    width: 300px;
+    border: 0;
+    border-radius: 5px;
+    /* background-color: #EEEFF1; */
+    /* padding: 30px; */
+    margin: 0 auto;
+    /* text-align:center */
+}
+
+.text-field{
+    height: 45px;
+    font-size: 14px;
+    /* margin-bottom: 15px; */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+.submit-btn{
+    height: 45px;
+    color: #0e0c0c;
+    font-size: 14px;
+    background-color: #e3ebf6;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+.submit-btn2{
+    height: 45px;
+    color: #0e0c0c;
+    font-size: 14px;
+    background-color: #e3ebf6;
+    margin-top: 10PX;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+.filebox{
+    margin-top: 15px;
+}
+.filebox .upload-name {
+    border-radius: 5px;
+    display: inline-block;
+    height: 45px;
+    /* padding: 0 10px; */
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 68%;
+    color: #999999;
+}
+
+.filebox label {
+    text-align : center;
+    border-radius: 5px;
+    display: inline-block;
+    /* padding: 10px 20px; */
+    color: #0e0c0c;
+    vertical-align: middle;
+    background-color: #e3ebf6;
+    cursor: pointer;
+    height: 45px;
+    line-height: 45px;
+    width: 85px;
+    font-size: 14px;
+}
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.link{
+    margin-top: 10px;
+    text-align: center;
+}
+.link a {
+    text-decoration-line: none;
+    font-size: 12px;
+    color: #ffffff;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>회원 가입</title>
+    <link rel="stylesheet" href="join.css">
+  </head>
+  <body> 
+
+    <h2>회원 가입</h2>
+    <div class="container">
+      
+      <form method="POST" action="store_join.php" enctype="multipart/form-data" onsubmit='return validateMyForm();'>
+
+        <p style="color: #ffff; font-size: 12px;">Username</p>
+          <input type="text" name="user_name" class="text-field" placeholder="이름">
+
+          <p style="color: #ffff; font-size: 12px;">Phone</p>
+          <input type="text" name="user_phone" class="text-field" placeholder="전화번호">
+
+          <p style="color: #ffff; font-size: 12px;">ID</p>
+          <input type="text" name="user_id" class="text-field" placeholder="아이디">
+
+          <p style="color: #ffff; font-size: 12px;">Password</p>
+          <input type="password" id="password1" name="password1" class="text-field" placeholder="비밀번호">
+
+          <p style="color: #ffff; font-size: 12px;">Comfirm Password</p>
+          <input type="password" id="password2" name="password2" class="text-field" placeholder="비밀번호 확인">
+
+          <p style="color: #ffff; font-size: 12px;">사업자 등록증 올리기</p>
+          <!-- <div class="filebox"> -->
+            <!-- <input class="upload-name" placeholder="사업자 등록증 올리기" readonly> -->
+            <!-- <label for="auth_file">파일찾기</label> -->
+            <input type="file" id="auth_file" name="auth_file">
+          <!-- </div> -->
+
+          <p style="color: #ffff; font-size: 12px;">프로필 사진 등록</p>
+          <!-- <div class="filebox"> -->
+            <!-- <input class="upload-name" placeholder="프로필 사진 등록" readonly> -->
+            <!-- <label for="auth_file">사진등록</label> -->
+            <input type="file" id="user_profile" name="user_profile">
+          <!-- </div> -->
+          
+          <input type="submit" id="submit" value="가입하기" class="submit-btn">
+          <div class="link">
+            <a href="index.html">취소</a>
+          </div>
+          <!-- <input type="reset" value="취소" class="submit-btn2"> -->
+      </form>
+    </div>           
+  </body>
+</html>

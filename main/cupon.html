@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>내 가게 정보</title>
+  <style>
+    body {
+    margin: 50px;
+    justify-content: center;
+    background-color: rgb(211, 237, 255);
+    text-align: center;
+  }
+  .img{
+      margin-bottom: 10px;
+  }
+  input{
+    margin:0;
+  }
+  input[type=text]{
+    width: 75%;
+    height: 70px;;
+    border:none;
+    font-size:1em;
+    padding-left: 5px;
+    /* font-style: oblique; */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display:inline;
+    outline:none;
+    box-sizing: border-box;
+    color:black;
+    border: 2px solid rgb(248, 226, 136);
+  }
+  input[type=tel]{
+    width: 75%;
+    height: 70px;;
+    border:none;
+    font-size:1em;
+    padding-left: 5px;
+    /* font-style: oblique; */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display:inline;
+    outline:none;
+    box-sizing: border-box;
+    color:black;
+  }
+  input[type=submit]{
+      height: 70px;;
+      border:none;
+      background-color: rgb(248, 226, 136);
+      border: 1px solid rgb(248, 226, 136);
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      /* font-size:1em; */
+      color:black;
+      outline:none;
+      display:inline;
+      margin-left: -10px;
+      box-sizing: border-box;
+  }
+  /* input[type=button]:hover{ 
+    background-color: lightgray;
+  }*/
+  .couponbox{
+      margin-top: 10px;
+      width: 54%;
+      height: 6px;
+      border: 0;
+      font-size:1em;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      background-color: #ffffff;
+      border: 2px solid rgb(248, 226, 136);
+      padding: 30px;
+      margin: 0 auto;
+      float: left;
+      line-height: 10px;
+    }
+    .couponbutton{
+      height: 70px;
+      border: 1px solid rgb(248, 226, 136);
+      background-color: rgb(248, 226, 136);
+      color: black;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding: 5px;
+      float: left;
+      margin-bottom: 10px;
+    }
+
+    .couponname{
+      margin-bottom: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="img">
+    <img src="images/pizza.jpeg" height="100px" style="vertical-align:middle;">
+    <span style="font-size:20px"><strong>행복한 빵집</strong></span>
+  </div>
+
+  <div class="check">
+    <h3>출석쿠폰</h3>
+    <form>
+      <input type="tel" name="tel" class="text-field" style="border: 2px solid rgb(80, 159, 224);" placeholder="전화번호를 입력하세요">
+      <input type="submit" value="등록하기" class="submit-btn" style="background-color: rgb(80, 159, 224); border: 1px solid rgb(80, 159, 224);">
+    </form>
+  </div>
+
+  <div class="coupon">
+    <h3>쿠폰</h3>
+  </div>
+
+  <!-- <div class="couponbox">
+    할인쿠폰
+  </div>
+  <button class="couponbutton">쿠폰<br>삭제하기</button> -->
+
+  <div class="couponname">
+    <input type="text" name="name" value="" placeholder="쿠폰 이름을 적어주세요">
+    <input type="submit" name="name" value="쿠폰 등록">
+  </div>
+
+  <script>
+    function cp(a){
+      let div = document.createElement('div');
+      div.classList.add('couponbox');
+      let text = document.createTextNode(a);
+      div.appendChild(text);
+      document.body.appendChild(div);
+
+      let btn = document.createElement('input');
+      btn.setAttribute("type", "submit");
+      btn.setAttribute("value", "쿠폰 삭제");
+      btn.classList.add('couponbutton');
+      document.body.appendChild(btn);
+    }
+    
+    cp('a');
+
+  </script>
+</body>
+</html>

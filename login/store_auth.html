@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <h1> 가게 인증 </h1>
+    </head>
+    <body>
+        사업자 등록증을 업로드해주세요
+        <br>
+        <form method="POST" enctype="multipart/form-data" action="store_auth.php">
+            <br>
+            <input type="file" name="store_auth" id="store_auth"/><br>
+            <!-- <img id="store_img" src="#" alt="" style="width:500px;height:500px;"> -->
+            <div id="store_img_appear">
+
+            </div>
+            <button type="submit" name="submit" id="submit">인증</button>
+            <button type="button" name="cancel" id="cancel">취소</button>
+        </form>
+
+        <script>
+            function previewImage(){
+                var preview = new FileReader();
+                preview.onload = function(e){
+                    document.getElementById("store_img").src = e.target.result;
+                };
+                preview.readAsDataURL(document.getElementById("store_auth").files[0]);
+            }
+
+            $(document).ready(function(){
+                $('#store_auth').change(function(){
+                    $('#store_img_appear').append("<img id='store_img' src='#' alt='' style='width:500px;height:500px;'>");
+                    previewImage();
+                });
+            });
+        </script>
+    </body>
+</html>

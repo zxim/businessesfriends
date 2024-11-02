@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>가게 위치 설정</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <style>
+
+            @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+            *{
+                font-family: 'Nanum Gothic', sans-serif;
+            }
+
+            body {
+                margin: 0;
+            }
+
+            .top{
+                position: fixed;
+                width: 100vw;
+                top: -1%;
+                vertical-align:middle;
+                z-index: 2;
+                background-color: #e3eaf6;
+                padding-bottom: 10px;
+            }
+
+            p{
+                margin-left: 30px;
+                margin-bottom: 5px;
+            }
+
+            input[type="text"]{
+                /* margin-top: 15px; */
+                margin-left: 20px;
+                width: 60%;
+                height: 30px;
+                border: none;
+                box-shadow: 1px 2px 8px -2px grey;
+                border-radius: 30px;
+            }
+
+            input[type="button"]{
+                width: 60px;
+                background-color: rgb(150, 162, 194);
+                box-shadow: 1px 2px 8px -2px grey;
+                color: white;
+                border: none;
+                height: 30px;
+                border-radius: 30px;
+            }
+
+            .location{
+                width: 30px;
+                margin-left: 10px;
+                margin-bottom: -11px;
+            }
+
+            #setting{
+                position: fixed;
+                bottom: 10px;
+                left: 10px;
+                z-index: 2;
+                border: none;
+                width: 95px;
+                height: 40px;
+                background-color: #e3eaf6;
+                border-radius: 30px;
+                box-shadow: 1px 2px 8px -2px grey;
+                /* color: white; */
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="top">
+            <!-- <h4>가게 주인가게등록</h4> -->
+            <p>가게 위치를 등록해주세요</p>
+
+            <!-- 검색 -->
+            <input type="text" id="address"/>
+            <input type="button" id="button" value="검색"/>
+            <!-- <button onclick="startMyLocation();">Now</button> -->
+            <img class="location" src="images/location.png" onclick="startMyLocation();">
+        </div>
+
+        
+
+        <!-- <br> -->
+
+        
+
+        <!-- 지도 -->
+        <div id="map" style="width:100%;height:100vh; z-index: 1;"></div>
+
+        <!-- form 태그에 가게주인 정보 다 전달하기 -->
+        <!-- <form method="post" action="insertDB.php"> -->
+            <input type="hidden" id="latitude" name="latitude"/>
+            <input type="hidden" id="longitude" name="longitude"/>
+            <input type="hidden" id="s_address" name="address"/>
+            <button type="submit" id="setting"><img src="images/check2.png" style="height: 20px; margin-bottom: -5px;"> 위치 결정</button>
+        <!-- </form> -->
+
+        <script>
+            // worker map으로 마커를 지도 중앙에 위치시키고 좌표를 받는다. O
+            // 현재 위치를 매장위치로 설정 기능 O
+            // 받은 좌표를 가지고 db에 입력 O
+
+            var watchId, i=0;
+            var lat = 37.541, lng = 126.986;
+            var map, set_marker;
+            var button = document.getElementById('button');
+            var address = document.getElementById('address').value;
+            var geocoder, store_position;
+            var m_lat, m_lng, s_address;
+
+            function storeMap_init(){
+                geocoder = new google.maps.Geocoder();
+                map = new google.maps.Map(document.getElementById("map"),
+                {
+                    center: new google.maps.LatLng(lat, lng),
+                    zoom: 15
+                });
+
+                set_marker = new google.maps.Marker({
+                    position: map.getCenter(),
+                    map: map
+                });
+
+
+                // map click Event 예제
+                // map.addListener("click", function(mapsMouseEvent){
+                //     // marker = new google.maps.Marker({
+                //     //     position: mapsMouseEvent.latLng,
+                //     //     map: map
+                //     // });
+                //     marker.setPosition(mapsMouseEvent.latLng);
+                // })
+                
+                // geocode이용 주소 찾기
+                function searchAddress(){
+                    geocoder.geocode({
+                        address: document.getElementById("address").value
+                    }, (results, status) => {
+                        if(status == google.maps.GeocoderStatus.OK){
+                            s_lat = results[0].geometry.location.lat();
+                            s_lng = results[0].geometry.location.lng();
+                            map.setCenter(new google.maps.LatLng(s_lat, s_lng));
+                            set_marker.setPosition(new google.maps.LatLng(s_lat, s_lng));
+                        }else{
+                            alert("Geocode was not successful for the following reason: " + status);
+                        }
+                    });
+                }
+
+                // store_position 위치 받아 latitude, longitude값 설정하기
+                function getStorePosition(){
+                    store_position = set_marker.getPosition();
+                    lat = store_position.lat();
+                    lng = store_position.lng();
+                    // alert("lat : " + lat);
+                    // alert("lng : " + lng);
+                    var e_lat = document.getElementById('latitude');
+                    var e_lng = document.getElementById('longitude');
+                    e_lat.value = lat;
+                    e_lng.value = lng;
+
+                    geocoder.geocode({
+                        location: store_position,
+                    }).then((response) => {
+                        s_address = response.results[0].formatted_address;
+                        console.log(s_address);
+                        document.getElementById('s_address').value = s_address;
+                        window.opener.document.getElementById('s_latitude').value = lat;
+                        window.opener.document.getElementById('s_longitude').value = lng;
+                        window.opener.document.getElementById('s_address').value = s_address;
+                        window.close();
+                    })
+                }
+
+                button.addEventListener('click', searchAddress);
+                setting.addEventListener('click', getStorePosition);
+
+                map.addListener("center_changed", function(){
+                    set_marker.setPosition(map.getCenter());
+                });
+            }
+
+                       
+            
+            
+            // geolocation 시작 함수
+            function startMyLocation(){
+                if(navigator.geolocation){
+                    watchId = navigator.geolocation.getCurrentPosition(myCallBack);
+                }else{
+                    alert('지오로케이션이 지원되지 않습니다.');
+                }
+            }
+            
+            // 현재 자신의 위치 callBack함수(geolocation)
+            function myCallBack(position){
+                console.log("startMyLocation Start...");
+                lat = position.coords.latitude;
+                lng = position.coords.longitude;
+                // var date = new Date(position.timestamp);
+                // var parseDate = date.toUTCString();
+                console.log("lat: " + lat + "lng: " + lng);
+                map.setCenter(new google.maps.LatLng(lat, lng));
+                // createMarker(lat, lng);
+                //id가 display인 요소에 텍스트를 추가한다.
+                // document.getElementById("display").innerHTML += 
+                // '<br> [' + (i++) + '] 일시: ' + parseDate + '위도 : ' + lat + ', 경도 : ' + lng; 
+            }
+
+        </script>
+        <div id="display"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoR_fav02PF9KxLHR6M1IAQRF2a2yqlho&callback=storeMap_init"></script>
+    </body>
+</html>
